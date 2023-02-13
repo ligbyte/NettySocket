@@ -1,0 +1,1 @@
+include ':netty_client', ':netty_server', ':lib_netty'
