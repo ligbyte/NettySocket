@@ -19,7 +19,7 @@ import com.yunbo.netty.client.status.ConnectState;
 import yunbo.nettyclient.adapter.LogAdapter;
 import yunbo.nettyclient.bean.LogBean;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NettyClientListener<String> {
+public class SocketClientActivity extends AppCompatActivity implements View.OnClickListener, NettyClientListener<String> {
 
     private static final String TAG = "MainActivity";
     private Button mClearLog;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_socket_client);
         findViews();
         initView();
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setMaxPacketLong(1024)//设置一次发送数据的最大长度，默认是1024
                 .build();
 
-        mNettyTcpClient.setListener(MainActivity.this); //设置TCP监听
+        mNettyTcpClient.setListener(SocketClientActivity.this); //设置TCP监听
     }
 
     private void initView() {

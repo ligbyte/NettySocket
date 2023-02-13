@@ -31,7 +31,7 @@ import io.netty.channel.ChannelFutureListener;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NettyServerListener<String> {
+public class SocketServerActivity extends AppCompatActivity implements View.OnClickListener, NettyServerListener<String> {
 
     private static final String TAG = "MainActivity";
     private Button mClearLog;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_socket_server);
 
         findViews();
         initData();
@@ -69,14 +69,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ClientChanel clientChanel = spinnerAdapter.getItem(position);
-                Toast.makeText(MainActivity.this, "onItemSelected:" + clientChanel.getClientIp(), Toast.LENGTH_LONG).show();
+                Toast.makeText(SocketServerActivity.this, "onItemSelected:" + clientChanel.getClientIp(), Toast.LENGTH_LONG).show();
                 NettyTcpServer.getInstance().selectorChannel(clientChanel.getChannel());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 NettyTcpServer.getInstance().selectorChannel(null);
-                Toast.makeText(MainActivity.this, "onNothingSelected", Toast.LENGTH_LONG).show();
+                Toast.makeText(SocketServerActivity.this, "onNothingSelected", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NettyTcpServer nettyTcpServer = NettyTcpServer.getInstance();
 //        nettyTcpServer.setPacketSeparator("#");
         if (!nettyTcpServer.isServerStart()) {
-            nettyTcpServer.setListener(MainActivity.this);
+            nettyTcpServer.setListener(SocketServerActivity.this);
 
             nettyTcpServer.start();
         } else {
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(MainActivity.this, clientChanel.getClientIp() + " 建立连接", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SocketServerActivity.this, clientChanel.getClientIp() + " 建立连接", Toast.LENGTH_LONG).show();
                     spinnerAdapter.notifyDataSetChanged();
                 }
             });
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             Log.e(TAG, "disconncect " + clientChanel.getClientIp());
-                            Toast.makeText(MainActivity.this, clientChanel.getClientIp() + " 断开连接", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SocketServerActivity.this, clientChanel.getClientIp() + " 断开连接", Toast.LENGTH_LONG).show();
                             spinnerAdapter.notifyDataSetChanged();
                         }
                     });

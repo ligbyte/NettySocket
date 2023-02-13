@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="yunbo.nettyclient.MainActivity">
+        <activity android:name="yunbo.nettyclient.SocketClientActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
