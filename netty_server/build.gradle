@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "ifreecomm.nettyserver"
+        applicationId "com.netty.server"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 1

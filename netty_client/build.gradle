@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 32
     defaultConfig {
-        applicationId "littlegreens.nettydemo"
+        applicationId "com.netty.client"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 1
