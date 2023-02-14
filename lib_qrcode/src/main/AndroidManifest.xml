@@ -1,0 +1,13 @@
+<manifest package="com.uuzuche.lib_zxing">
+
+    <application>
+
+        <!--        <activity-->
+        <!--            android:configChanges="orientation|keyboardHidden"-->
+        <!--            android:name=".activity.CaptureActivity"-->
+        <!--            android:screenOrientation="portrait"-->
+        <!--            android:windowSoftInputMode="stateAlwaysHidden"-->
+        <!--            android:theme="@style/Theme.AppCompat.NoActionBar"/>-->
+    </application>
+
+</manifest>

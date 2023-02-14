@@ -1,1 +1,1 @@
-include ':netty_client', ':netty_server', ':lib_netty'
+include ':netty_client', ':netty_server', ':lib_netty',':lib_qrcode'
