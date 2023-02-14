@@ -26,6 +26,7 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
     private Button mSendBtn;
     private Button mConnect;
     private EditText mSendET;
+    private EditText et_ip;
     private RecyclerView mSendList;
     private RecyclerView mReceList;
 
@@ -40,20 +41,6 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
         findViews();
         initView();
 
-        mNettyTcpClient = new NettyTcpClient.Builder()
-                .setHost(Const.HOST)    //设置服务端地址
-                .setTcpPort(Const.TCP_PORT) //设置服务端端口号
-                .setMaxReconnectTimes(3)    //设置最大重连次数
-                .setReconnectIntervalTime(5)    //设置重连间隔时间。单位：秒
-                .setSendheartBeat(false) //设置是否发送心跳
-                .setHeartBeatInterval(5)    //设置心跳间隔时间。单位：秒
-                .setHeartBeatData("I'm is HeartBeatData") //设置心跳数据，可以是String类型，也可以是byte[]，以后设置的为准
-                .setIndex(0)    //设置客户端标识.(因为可能存在多个tcp连接)
-                .setPacketSeparator("#")//用特殊字符，作为分隔符，解决粘包问题，默认是用换行符作为分隔符
-                .setMaxPacketLong(1024)//设置一次发送数据的最大长度，默认是1024
-                .build();
-
-        mNettyTcpClient.setListener(SocketClientActivity.this); //设置TCP监听
     }
 
     private void initView() {
@@ -74,7 +61,7 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
         mConnect = findViewById(R.id.connect);
         mSendBtn = findViewById(R.id.send_btn);
         mClearLog = findViewById(R.id.clear_log);
-
+        et_ip = findViewById(R.id.et_ip);
         mConnect.setOnClickListener(this);
         mSendBtn.setOnClickListener(this);
         mClearLog.setOnClickListener(this);
@@ -85,6 +72,25 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
         switch (v.getId()) {
 
             case R.id.connect:
+                String host = et_ip.getText().toString().trim();
+                if (TextUtils.isEmpty(host)){
+                    Toast.makeText(SocketClientActivity.this, "请输入或扫描服务器IP地址", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                mNettyTcpClient = new NettyTcpClient.Builder()
+                        .setHost(Const.HOST)    //设置服务端地址
+                        .setTcpPort(Const.TCP_PORT) //设置服务端端口号
+                        .setMaxReconnectTimes(3)    //设置最大重连次数
+                        .setReconnectIntervalTime(5)    //设置重连间隔时间。单位：秒
+                        .setSendheartBeat(false) //设置是否发送心跳
+                        .setHeartBeatInterval(5)    //设置心跳间隔时间。单位：秒
+                        .setHeartBeatData("I'm is HeartBeatData") //设置心跳数据，可以是String类型，也可以是byte[]，以后设置的为准
+                        .setIndex(0)    //设置客户端标识.(因为可能存在多个tcp连接)
+//                .setPacketSeparator("#")//用特殊字符，作为分隔符，解决粘包问题，默认是用换行符作为分隔符
+                        .setMaxPacketLong(1024)//设置一次发送数据的最大长度，默认是1024
+                        .build();
+
+                mNettyTcpClient.setListener(SocketClientActivity.this); //设置TCP监听
                 connect();
                 break;
 
