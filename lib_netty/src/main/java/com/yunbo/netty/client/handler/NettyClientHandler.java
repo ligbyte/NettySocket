@@ -29,10 +29,10 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
 
 
     public NettyClientHandler(NettyClientListener listener, int index, boolean isSendheartBeat, Object heartBeatData) {
-        this(listener,index,isSendheartBeat,heartBeatData,null);
+        this(listener, index, isSendheartBeat, heartBeatData, null);
     }
 
-    public NettyClientHandler(NettyClientListener listener, int index, boolean isSendheartBeat, Object heartBeatData,String separator) {
+    public NettyClientHandler(NettyClientListener listener, int index, boolean isSendheartBeat, Object heartBeatData, String separator) {
         this.listener = listener;
         this.index = index;
         this.isSendheartBeat = isSendheartBeat;
@@ -108,7 +108,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
      */
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) {
-        Log.e(TAG, "channelRead0:"+msg);
+        Log.e(TAG, "channelRead0:" + msg);
         listener.onMessageResponseClient(msg, index);
     }
 
